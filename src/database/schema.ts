@@ -24,7 +24,7 @@ export const SchemaDB=async()=>{
          type VARCHAR(30) NOT NULL
          CHECK(type IN('bug','feature_request')),
          status VARCHAR(30) DEFAULT 'open' CHECK(status IN('open','in_progress','resolved')),
-          reported_id INTEGER NOT NULL,
+          reporter_id INTEGER NOT NULL,
           created_at TIMESTAMP DEFAULT NOW(),
          updated_at TIMESTAMP DEFAULT NOW()
 
