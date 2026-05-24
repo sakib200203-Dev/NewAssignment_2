@@ -27,7 +27,25 @@ const createAccount=async(req:Request,res:Response)=>{
     }
 
 }
+const loginUser=async(req:Request,res:Response)=>{
+    try{
+       const result=await authService.loginUserDB(req.body);
+         return sendResponse(res, {
+            statusCode: 200,
+            success: true,
+            message: " Login successfully",
+            data:  result
+        });
+    }catch(error:any){
+       return sendResponse(res, {
+            statusCode: 500,
+            success: false,
+            message: "Failed to login user",
+            error: error.message
+        });
+    }
+}
 
 export const authController={
-    createAccount
+    createAccount,loginUser
 }

@@ -4,4 +4,8 @@ interface  User{
     password:string,
     role:string,
 }
-export type {User};
+interface LoginUser{
+    email:string,
+    password:string
+}
+export type {User, LoginUser};
