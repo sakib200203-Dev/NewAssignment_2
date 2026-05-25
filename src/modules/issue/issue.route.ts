@@ -4,5 +4,6 @@ import { issueController } from "./issue.controller";
 import {USER_ROLES} from "../../types/role";
 const route=Router();
 route.post("/",middleAuth(USER_ROLES.contributor,USER_ROLES.maintainer),issueController.createIssue);
+route.get("/:id",issueController.getSingleIssue);
 
 export const issueRouter=route;

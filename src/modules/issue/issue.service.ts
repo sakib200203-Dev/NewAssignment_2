@@ -9,6 +9,12 @@ const createIssueDB=async(payLoad:Issue)=>{
     `,[title,description,type,reporter_id])
     return result;
 }
+const getSingleIssueDB=async(id:Number)=>{
+    const result=await pool.query(`
+    SELECT * FROM issues WHERE id=$1 `,[id])
+    return result;
+}    
 export const issueService={
-    createIssueDB
+    createIssueDB,
+    getSingleIssueDB
 }

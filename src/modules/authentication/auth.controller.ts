@@ -13,7 +13,7 @@ const createAccount=async(req:Request,res:Response)=>{
             data: result.rows[0]
         });
 
-        console.log( result.rows[0])
+        
     } catch (error:any) {
       return sendResponse(res, {
             statusCode: 500,
@@ -22,9 +22,8 @@ const createAccount=async(req:Request,res:Response)=>{
             error: error.message
         });
     }
-    const LoginAccount=async()=>{
-                   
-    }
+                 
+    
 
 }
 const loginUser=async(req:Request,res:Response)=>{
