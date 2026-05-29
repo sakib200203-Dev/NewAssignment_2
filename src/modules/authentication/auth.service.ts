@@ -31,6 +31,7 @@ const loginUserDB=async(payLoad:LoginUser)=>{
   }
   const user=UserData.rows[0];
   const isPasswordValid=await bcrypt.compare(password,user.password);
+  
   if(!isPasswordValid){
     throw new Error("Invalid password");
   }

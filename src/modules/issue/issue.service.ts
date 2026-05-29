@@ -13,8 +13,16 @@ const getSingleIssueDB=async(id:Number)=>{
     const result=await pool.query(`
     SELECT * FROM issues WHERE id=$1 `,[id])
     return result;
-}    
+}   
+const getUpdateIssueDB=async(id:Number,payLoad:Issue)=>{
+    const {title,description,type}=payLoad;
+    const result=await pool.query(`
+    UPDATE issues SET title=COALESCE($1, title), description=COALESCE($2,description), type=COALESCE($3,type) WHERE id=$4 RETURNING *
+    `,[title,description,type,id])
+    return result;
+}
 export const issueService={
     createIssueDB,
-    getSingleIssueDB
+    getSingleIssueDB,
+    getUpdateIssueDB
 }
