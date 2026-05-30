@@ -82,8 +82,37 @@ const UpdateIssue=async(req:Request,res:Response)=>{
         });
     }
 }
+const DeleteIssue=async(req:Request,res:Response)=>{
+    try {
+        const id =Number(req.params.id);
+        const DeleteInfo=await issueService.DeleteIssueDB(id);
+        if(!DeleteInfo){
+            return sendResponse(res,{
+                statusCode:400,
+                success:false,
+                message:"Issue not found"
+            })
+        }
+        
+           return sendResponse(res,{
+            statusCode:200,
+            success:true,
+            message: "Issue deleted successfully",
+            data: {}
+        });
+    } catch (error:any) {
+         return sendResponse(res,{
+            statusCode:500,
+            success:false,
+            message: "Failed to delete  issue",
+            error: error.message
+        });
+    }
+
+}
 export const issueController={
     createIssue,
     getSingleIssue,
-    UpdateIssue
+    UpdateIssue,
+    DeleteIssue
 }

@@ -21,8 +21,17 @@ const getUpdateIssueDB=async(id:Number,payLoad:Issue)=>{
     `,[title,description,type,id])
     return result;
 }
+const DeleteIssueDB=async(id:Number)=>{
+    const result=await pool.query(`
+        DELETE  FROM issues WHERE id=$1 RETURNING *
+        
+        `,[id]);
+        return result.rows[0];
+
+}
 export const issueService={
     createIssueDB,
     getSingleIssueDB,
-    getUpdateIssueDB
-}
+    getUpdateIssueDB,
+    DeleteIssueDB
+} 

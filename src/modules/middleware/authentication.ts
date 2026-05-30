@@ -43,7 +43,7 @@ const middleAuth=(...roles:ROLES[])=>{
        }
     };
     } 
-const verifyToken=async(req:Request,res:Response,next:NextFunction)=>{
+const verifyToken=(req:Request,res:Response,next:NextFunction)=>{
     const Header= req.headers.authorization;
     if(!Header){
         return sendResponse(res,{

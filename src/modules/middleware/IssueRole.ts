@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { pool, SchemaDB } from "../../database/schema";
 import { sendResponse } from "../../utility/sendResponse";
+import { send } from "node:process";
  
  
   
@@ -31,4 +32,39 @@ import { sendResponse } from "../../utility/sendResponse";
             success:false,            
             message: "Forbidden:  You  are not authorized to perform this action"
         });
+    }
+
+     export const isMaintainer = async (req:Request,res:Response,next:NextFunction)=>{
+     try {
+         const issueId=req.params.id;;
+     const result=await pool.query(`SELECT * FROM issues WHERE id=$1`,[issueId]);
+     const issue=result.rows[0];
+        if(!issue){
+            return sendResponse(res,{
+                statusCode:404,
+                success:false,
+                message: "Issue not found"
+            });
+        }
+        if(req.user?.role ==="maintainer"  ){
+            req.issue=issue;
+            return next();
+        } else{
+            return sendResponse(res,{
+                statusCode:403,
+                success:false,
+                message:"Maintainer access required"
+            })
+        }
+
+        
+     } catch (error:any) {
+         return sendResponse(res, {
+            statusCode: 500,
+            success: false,
+            message: "Error Middleware",
+            error: error.message
+        });
+        
+     }
     }
