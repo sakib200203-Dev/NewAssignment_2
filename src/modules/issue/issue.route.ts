@@ -7,6 +7,7 @@ import { isMaintainer, IssueRole } from "../middleware/IssueRole";
 
 const route=Router();
 route.post("/",middleAuth(USER_ROLES.contributor,USER_ROLES.maintainer),issueController.createIssue);
+route.get("/",issueController.getAllIssues);
 route.get("/:id",issueController.getSingleIssue);
 route.put("/:id",verifyToken,IssueRole,issueController.UpdateIssue);
 route.delete("/:id",verifyToken,isMaintainer,issueController.DeleteIssue);

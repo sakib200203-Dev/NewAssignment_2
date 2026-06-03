@@ -28,6 +28,27 @@ const createIssue=async(req:Request,res:Response)=>{
         });
     }
 }
+const getAllIssues=async(req:Request,res:Response)=>{
+    try {
+        const result=await issueService.getAllIssueDB();
+        return sendResponse(res,{
+            statusCode:200,
+            success:true,
+            message: "Issues retrived successfully",
+            data: result
+        });
+
+
+    } catch (error:any) {
+         return sendResponse(res,{
+            statusCode:500,
+            success:false,
+            message: "Failed to get issue",
+            error: error.message
+        });
+        
+    }
+}
 const getSingleIssue=async(req:Request,res:Response)=>{
      
     try{ 
@@ -114,5 +135,6 @@ export const issueController={
     createIssue,
     getSingleIssue,
     UpdateIssue,
-    DeleteIssue
+    DeleteIssue,
+    getAllIssues
 }
