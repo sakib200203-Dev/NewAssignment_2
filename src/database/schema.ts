@@ -1,8 +1,12 @@
-import {Pool} from "pg";
+import { Pool } from "pg";
 import config from "../config/index";
-export  const pool=new Pool({
-   connectionString:config.connection_string
-})
+ 
+export const pool = new Pool({
+  connectionString:config.CONNECTION_STRING,
+  ssl:{
+    rejectUnauthorized:false
+  }
+});
 export const SchemaDB=async()=>{
    await pool.query(`
     CREATE TABLE IF NOT EXISTS users(

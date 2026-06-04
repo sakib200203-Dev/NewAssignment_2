@@ -5,8 +5,12 @@ import globalErrorHandler from "./modules/middleware/globalError";
  
 const app:Application=express();
 app.use(express.json()); 
+app.get("/",(req:Request,res:Response)=>{
+    res.json({ message: "Welcome to Issue Tracker API" });
+});
 app.use(express.urlencoded({extended:true}));
 app.use("/api/auth",authRouter);
 app.use("/api/issue",issueRouter);
 app.use(globalErrorHandler );
+
 export default app; 

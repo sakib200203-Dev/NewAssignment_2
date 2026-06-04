@@ -41,7 +41,7 @@ const loginUserDB=async(payLoad:LoginUser)=>{
      
     role:user.role 
   }
-  const token=jwt.sign(jwtpayload,config.jwt_secret_key,{expiresIn:"20d"});
+  const token=jwt.sign(jwtpayload,config.jwt_secret_key,{expiresIn:"40d"});
   return {  token,
     user
     };
