@@ -6,7 +6,7 @@ dotenv.config({
 const config={
   CONNECTION_STRING:process.env.CONNECTIONSTRING  as string || "",
   port:process.env.PORT ||5000,
-  secret:process.env.JWT_SECRET_KEY as string || "",
+  jwt_secret_key:process.env.JWT_SECRET_KEY as string || "",
 };
 if(!config.CONNECTION_STRING){
   throw new Error("CONNECTION_STRING is not defined in environment variables");
